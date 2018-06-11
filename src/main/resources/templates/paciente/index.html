@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8"/>
-		<title>Insert title here</title>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	</head>
 		<body>
 			<table>
@@ -13,10 +11,9 @@
 	                </tr>
 	            </thead>
 	            <tbody>
-	                 <tr>
-	                     <td>Lucas</td>
-	                     <td>Indefinido</td>
-	                 </tr>
+	              	<tr th:each="umpac : ${listapac}">
+                    	<td th:text="${umpac.nome}"></td>
+                    	<td th:text="${umpac.sexo}"></td>
 	            </tbody>
         	</table>
 		</body>
