@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:include="layout :: htmlhead"></head>
+    <body>
+        <div class="container">
+            <nav th:replace="layout :: menu">(menu)</nav>
+            <a href="form.html" th:href="@{/consulta/novo}" class="btn btn-primary btn-lg" role="button">Novo</a>
+            <div class="border border-dark">
+                <table class="table">
+                    <thead class="thead-light"> 
+                        <tr>
+                            <th scope="col">Data</th>
+                            <th scope="col">Médico</th>
+                            <th scope="col">Paciente</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr scope="row" th:each="umacons : ${listaConsulta}">
+                            <td th:text="${#dates.format(umacons.data, 'dd/MM/yyyy HH:mm')}"></td>
+                            <td th:text="${umacons.medicoResponsavel.nome}"></td>
+                            <td th:text="${umacons.paciente.nome}"></td>
+                            <td>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div th:include="layout :: footer" id="footer">(footer)</div>
+    </body>
+</html>

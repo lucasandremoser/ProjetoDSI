@@ -1,6 +1,8 @@
 package br.univille.projetodsi.model;
 
-import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -8,7 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -28,6 +32,10 @@ public class Consulta {
 	    @ManyToOne(cascade= {CascadeType.MERGE,CascadeType.REFRESH})
 	    private Medico medicoResponsavel;
 
+	    @OneToMany(cascade=CascadeType.ALL)
+	    @JoinColumn(name="consulta_id")
+	    private List<ProcedimentoRealizado> listaProcedimentos = new ArrayList<ProcedimentoRealizado>();
+	    
 	    public long getId() {
 	        return id;
 	    }

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:include="layout :: htmlhead"></head>
+    <body>
+        <div class="container">
+            <nav th:replace="layout :: menu">(menu)</nav>
+            <div class="border border-dark">
+                <form th:action="@{/consulta}"  action="#" method="post">
+                    <div th:object="${consulta}">                   
+                        <input type="hidden" id="txtid" th:field="${consulta.id}" />
+                        <div class="form-group">
+                            <label for="datetimepicker1">Data da Consulta</label>
+                            <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                                <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1" 
+                                    th:field="${consulta.data}"/>
+                                <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="slcMedico">Medico</label>
+                            <select class="form-control" id="slcMedico" th:field="${consulta.medicoResponsavel}">
+                                <option th:each="umMedico : ${listaMedico}" th:value="${umMedico.id}" th:text="${umMedico.nome}"></option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="slcPaciente">Paciente</label>
+                            <select class="form-control" id="slcPaciente" th:field="${consulta.paciente}">
+                                <option th:each="umPaciente : ${listaPaciente}" th:value="${umPaciente.id}" th:text="${umPaciente.nome}"></option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="slcstatus">Status</label>
+                            <select class="form-control" id="slcstatus" th:field="${consulta.status}">
+                                <option th:value="Agendado">Agendado</option>
+                                <option th:value="Atendimento">Atendimento</option>
+                                <option th:value="Finalizado">Finalizado</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" name="save" class="btn btn-primary">Enviar</button>
+                </form>
+            </div>
+        </div>
+        <div th:include="layout :: footer" id="footer">(footer)</div>
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker({
+                    format:"DD/MM/YYYY HH:mm"                   
+                });
+            });
+        </script>
+    </body>
+</html>
